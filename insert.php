@@ -7,12 +7,15 @@ $data=[
   "parent_id" => $_POST['parent_id']
 ];
 
-$connect = new connect("localhost", "root", "root", "db");
-$connect->connect_pdo();
-$query = $connect->PDO->prepare("INSERT INTO al_tree(name, parent_id) VALUES (:name, :parent_id)");
-$query -> execute($data);
+$action = new ExecuteQueryMySql();
+$action::insert($data);
 
-$select = new outTree;
-$select->outTree();
-$select->dynamicallyStyles();
+$ds = new dynamicallyStyles();
+$ds::loadStyles();
+
+$select = new outTree();
+
+$echoTree = new echoTree();
+$echoTree->outTree(null, 0, $select->_categoryArr );
+
  ?>

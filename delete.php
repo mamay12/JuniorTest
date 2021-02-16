@@ -5,12 +5,15 @@ include_once "select.php";
     "id" => $_POST['id']
   ];
 
-  $connect = new connect("localhost", "root", "root", "db");
-  $connect->connect_pdo();
-  $query = $connect->PDO->prepare("DELETE FROM `al_tree` WHERE id=:id");
-  $query->execute($data);
+  $action = new ExecuteQueryMySql();
+  $action::delete($data);
 
-  $select=new outTree;
-  $select->outTree();
-  $select->dynamicallyStyles();
+  $ds = new dynamicallyStyles();
+  $ds::loadStyles();
+
+  $select = new outTree();
+
+  $echoTree = new echoTree();
+  $echoTree->outTree(null, 0, $select->_categoryArr );
+
  ?>

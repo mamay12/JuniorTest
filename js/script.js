@@ -1,8 +1,22 @@
-
 var parent_idValue=null;
 var idValue=null;
 var cnt=null;
 
+/**
+ * Handling clicking on button 'create root'
+ */
+
+$(document).ready(function(){
+  $(document).on('click', 'button.create-root', function(){
+    $.ajax({
+      method: "POST",
+      url: "insert.php",
+      data: {name: 'root'},
+      success:
+        function(result){
+          document.body.innerHTML=result;
+        }
+    });
   });
 });
 
@@ -13,7 +27,7 @@ var cnt=null;
 $(document).ready(function() {
   $(document).on('click', '.sub-text', function() {
     idValue = $(this).attr('id');
-    var text = document.getElementById(idValue).innerHTML;
+    //var text = document.getElementById(idValue).innerHTML;
     setVisibleAdd('.update-modal');
   });
 });
